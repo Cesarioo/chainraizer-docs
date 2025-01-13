@@ -1,15 +1,10 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
-import { Head } from 'next/head'
+import Head from 'next/head'
 import 'nextra-theme-docs/style.css'
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
-  title: 'My Nextra Docs',
-  description: 'Documentation site built with Nextra'
-}
 
 const navbar = (
   <Navbar
@@ -21,6 +16,10 @@ const footer = <Footer>MIT {new Date().getFullYear()} © Your Name.</Footer>
 export default function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
+      <Head>
+        <title>My Nextra Docs</title>
+        <meta name="description" content="Documentation site built with Nextra" />
+      </Head>
       <body className={inter.className}>
         <Layout
           navbar={navbar}
