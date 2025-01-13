@@ -1,41 +1,31 @@
-import Image from 'next/image'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export default {
-  logo: (
-    <div className="flex items-center">
-      <Image 
-        src="/logo.png" 
-        alt="ChainRaizer Logo" 
-        width={100} 
-        height={150}
-        className="h-full w-auto"
-      />
-    </div>
-  ),
+  logo: <b>Documentation</b>,
   project: {
-    link: 'https://github.com/yourusername/docs-chainraizer'
+    link: 'https://github.com/Cesarioo/chainraizer-docs'
   },
-  docsRepositoryBase: 'https://github.com/yourusername/docs-chainraizer',
+  docsRepositoryBase: 'https://github.com/Cesarioo/chainraizer-docs',
+  footer: {
+    text: `MIT ${new Date().getFullYear()} © Your Name.`
+  },
+  head: (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Documentation site built with Nextra" />
+      <title>My Nextra Docs</title>
+    </>
+  ),
+  primaryHue: {
+    dark: 204,
+    light: 212
+  },
+  font: false,
   useNextSeoProps() {
     return {
-      titleTemplate: '%s – ChainRaizer Docs'
+      titleTemplate: '%s – My Nextra Docs'
     }
-  },
-  footer: {
-    text: `MIT ${new Date().getFullYear()} © ChainRaizer.`
-  },
-  navigation: {
-    prev: true,
-    next: true
-  },
-  darkMode: true,
-  primaryHue: {
-    dark: 200,
-    light: 200
-  },
-  sidebar: {
-    defaultMenuCollapseLevel: 1,
-    autoCollapse: true,
-    toggleButton: true
   }
 }
