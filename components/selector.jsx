@@ -4,8 +4,16 @@ import Link from 'next/link';
 export const DocSelector = () => {
   const options = [
     {
+      title: 'ChainRaizer',
+      description: 'Learn about our company, protocol, and vision for the future of private equity',
+      icon: '🚀',
+      path: '/chainraizer',
+      gradient: 'from-[#f97316] to-[#fb923c]',
+      shadow: 'hover:shadow-orange-500/50'
+    },
+    {
       title: 'Investor Documentation',
-      description: 'Token economics, investment strategy, and market analysis',
+      description: 'Start investing in companies through the ChainRaizer protocol',
       icon: '💼',
       path: '/investor',
       gradient: 'from-[#2563eb] to-[#3b82f6]',
@@ -13,7 +21,7 @@ export const DocSelector = () => {
     },
     {
       title: 'Technical Documentation',
-      description: 'Architecture, smart contracts, and API references',
+      description: 'Deep dive into how ChainRaizer is built and its technical architecture',
       icon: '⚡',
       path: '/technical',
       gradient: 'from-[#7c3aed] to-[#8b5cf6]',
@@ -22,7 +30,7 @@ export const DocSelector = () => {
   ];
 
   return (
-    <div className="grid md:grid-cols-2 gap-8 my-12 px-4">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 my-12 px-4">
       {options.map((option) => (
         <Link 
           href={option.path} 
@@ -31,27 +39,28 @@ export const DocSelector = () => {
         >
           <div 
             className={`
-              p-8 rounded-2xl 
+              p-6 rounded-2xl 
               bg-gradient-to-br ${option.gradient}
               transform transition-all duration-300
               hover:scale-[1.02] hover:-translate-y-1
               shadow-lg ${option.shadow}
               border border-white/10
               backdrop-blur-sm
+              h-full
             `}
           >
-            <div className="flex items-center space-x-4 mb-6">
-              <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
+            <div className="flex items-center space-x-4 mb-4">
+              <span className="text-4xl group-hover:scale-110 transition-transform duration-300">
                 {option.icon}
               </span>
-              <h3 className="text-2xl font-bold text-white m-0">
+              <h3 className="text-xl font-bold text-white m-0">
                 {option.title}
               </h3>
             </div>
-            <p className="text-lg text-white/80 m-0 leading-relaxed">
+            <p className="text-base text-white/80 m-0 leading-relaxed">
               {option.description}
             </p>
-            <div className="flex items-center mt-6 text-white/70 group-hover:text-white transition-colors">
+            <div className="flex items-center mt-4 text-white/70 group-hover:text-white transition-colors">
               <span>Learn more</span>
               <svg 
                 className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" 

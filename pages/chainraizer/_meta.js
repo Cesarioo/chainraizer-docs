@@ -10,6 +10,7 @@ export default {
   },
   'protocol-features': 'Features of the Protocol',
   'tokenization-process': 'Tokenization Process',
+  'product-roadmap': 'Product Roadmap',
   'decentralization-roadmap': 'Decentralization Roadmap',
   '---': {
     type: 'separator',
@@ -17,6 +18,7 @@ export default {
       <div className="flex items-center gap-1"> ChainRaizer Labs </div>
     )
   },
-  'company-background': 'Company Background',
-  'future-outlook': 'Future Outlook',
+  mission: 'Our Mission',
+  team: 'The Builders',
+  notice: 'About ChainRaizer Labs',
 } 
