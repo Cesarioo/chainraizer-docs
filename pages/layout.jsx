@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import Head from 'next/head'
-import 'nextra-theme-docs/style.css'
+import '../styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
