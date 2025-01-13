@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google'
-import './globals.css'
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import Head from 'next/head'
 import 'nextra-theme-docs/style.css'
