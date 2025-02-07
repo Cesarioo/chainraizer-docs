@@ -4,16 +4,8 @@ export default {
     type: 'page',
     display: 'hidden'
   },
-  chainraizer: {
-    title: 'ChainRaizer 📜',
+  raizer: {
+    title: 'Raizer 📜',
     type: 'page'
-  },
-  investor: {
-    title: 'Investor Documentation 💻',
-    type: 'page'
-  },
-  technical: {
-    title: 'Technical Documentation 🛠️',
-    type: 'page'
-  },
+  }
 }

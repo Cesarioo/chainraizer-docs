@@ -1,27 +1,30 @@
 import React from 'react';
 
 const VARIANTS = {
-  chainraizer: {
+  Raizer: {
     icon: '🚀',
     gradient: 'from-orange-600 to-orange-500',
-    border: 'border-orange-400/20'
+    border: 'border-orange-400/20',
+    disabled: false
   },
   investor: {
     icon: '💼',
-    gradient: 'from-blue-600 to-blue-500',
-    border: 'border-blue-400/20'
+    gradient: 'from-gray-600 to-gray-500',
+    border: 'border-gray-400/20',
+    disabled: true
   },
   technical: {
     icon: '⚡',
-    gradient: 'from-violet-600 to-violet-500',
-    border: 'border-violet-400/20'
+    gradient: 'from-gray-600 to-gray-500',
+    border: 'border-gray-400/20',
+    disabled: true
   }
 };
 
 const SectionHeader = ({ 
   title, 
   description, 
-  type = 'chainraizer'
+  type = 'Raizer'
 }) => {
   const styles = VARIANTS[type];
 
@@ -32,12 +35,14 @@ const SectionHeader = ({
         bg-gradient-to-r ${styles.gradient}
         border ${styles.border}
         shadow-sm
+        ${styles.disabled ? 'opacity-60 cursor-not-allowed' : ''}
+        relative
       `}>
         <span className="text-2xl mr-2">{styles.icon}</span>
         <span className="text-white font-medium">{title}</span>
       </div>
       {description && (
-        <p className="mt-3 text-lg text-gray-600 dark:text-gray-300">
+        <p className={`mt-3 text-lg ${styles.disabled ? 'text-gray-400 dark:text-gray-500' : 'text-gray-600 dark:text-gray-300'}`}>
           {description}
         </p>
       )}

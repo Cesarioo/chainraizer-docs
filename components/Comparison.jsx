@@ -43,7 +43,7 @@ export default function Comparison({ traditional, web3, title }) {
                 <div className="p-3 bg-blue-500/10 rounded-2xl shadow-inner">
                   <IconWeb3 className="h-8 w-8 text-blue-600" />
                 </div>
-                <h4 className="text-lg font-semibold text-blue-900">ChainRaizer Solution</h4>
+                <h4 className="text-lg font-semibold text-blue-900">Raizer Solution</h4>
               </div>
               <p className="text-blue-800 leading-relaxed">{web3}</p>
             </div>

@@ -7,8 +7,8 @@ export default {
   logo: (
     <div className="flex items-center">
       <Image 
-        src="/logo.png" 
-        alt="ChainRaizer Logo" 
+        src="/alpha.png" 
+        alt="raizer Logo" 
         width={100} 
         height={150}
         className="h-full w-auto"
@@ -21,11 +21,11 @@ export default {
   docsRepositoryBase: 'https://github.com/Cesarioo/chainraizer-docs',
   useNextSeoProps() {
     return {
-      titleTemplate: '%s – ChainRaizer Docs'
+      titleTemplate: '%s – raizer Docs'
     }
   },
   footer: {
-    text: `MIT ${new Date().getFullYear()} © ChainRaizer.`
+    text: `MIT ${new Date().getFullYear()} © raizer.`
   },
  
 
@@ -39,7 +39,7 @@ export default {
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content="Documentation site built with Nextra" />
-      <title>ChainRaizer Docs</title>
+      <title>Raizer Docs</title>
     </>
   ),
   primaryHue: {

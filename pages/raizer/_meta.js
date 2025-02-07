@@ -5,7 +5,7 @@ export default {
   '--': {
     type: 'separator',
     title: (
-      <div className="flex items-center gap-1"> ChainRaizer Protocol </div>
+      <div className="flex items-center gap-1"> Raizer Protocol </div>
     )
   },
   'protocol-features': 'Features of the Protocol',
@@ -15,10 +15,10 @@ export default {
   '---': {
     type: 'separator',
     title: (
-      <div className="flex items-center gap-1"> ChainRaizer Labs </div>
+      <div className="flex items-center gap-1"> ChainRaizer </div>
     )
   },
   mission: 'Our Mission',
   team: 'The Builders',
-  notice: 'About ChainRaizer Labs',
+  notice: 'About ChainRaizer',
 } 
