@@ -1,75 +1,65 @@
 import TeamMember from '../../components/TeamMember'
 import Highlight from '../../components/Highlight'
+import Feature from '../../components/Feature'
+import { Users, Code2, Shield, Network, Building2, Star } from 'lucide-react'
 
 # Our Team
 
-Raizer Labs brings together experts from traditional finance, blockchain technology, and business operations to build the future of private equity investment.
+Chainraizer brings together experts from traditional finance, blockchain technology, and business operations to build the future of private equity investment.
 
-<Highlight 
-  type="feature"
-  title="Building Excellence"
-  description="Our team combines decades of experience in finance, technology, and operations to create a revolutionary protocol."
-/>
+
+### Team Members
 
 export const teamMembers = [
   {
     name: "Gregory Saey",
-    role: "Chief Executive Officer",
+    role: "Traditional Finance & Legal",
     image: "https://pub-44b2544c34a4482595a3ab438ff68918.r2.dev/gregory.png",
     bio: "Former Trader at Amundi - Europe's largest asset manager. 20+ years experience in traditional finance.",
-    quote: "The future of private markets lies in the intersection of traditional finance and blockchain technology.",
+    quote: "Internet had a huge impact on the exchange of informations for the markets. Now our protocol will have the same impact for the exchange of value.",
     education: [
-      "Master in Finance, HEC Paris",
-      "Bachelor in Economics, Sciences Po Paris"
+      "EDHEC Business School, Paris",
+      "Eurex Trader, by Eurext"
     ],
     experience: [
       {
         role: "Senior Trader",
         company: "Amundi",
-        period: "2010-2023",
-        description: "Led trading operations for Europe's largest asset manager"
+        period: "2011-2018",
+        description: "Led the largest trading desk in Europe's largest asset manager"
       },
       {
         role: "Investment Analyst",
         company: "BNP Paribas",
-        period: "2005-2010",
+        period: "2011-2017",
         description: "Specialized in private market investments and analysis"
       }
     ],
     social: {
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      github: "https://github.com"
+      linkedin: "https://www.linkedin.com/in/gregorysaey/",
     }
   },
   {
     name: "Oscar Mairey",
     role: "Operations",
     image: "https://pub-44b2544c34a4482595a3ab438ff68918.r2.dev/oscar.png",
-    bio: "Web3 expert. Years of experience in Web3 Media, SocialFi and Crypto AI.",
+    bio: "When I started hosting my first meetups in Paris, people were actually paying the beers with ETH.",
     quote: "Web3 is not just about technology, it's about reimagining how we interact with financial systems.",
     education: [
-      "MSc in Computer Science, École Polytechnique",
-      "Blockchain Development Certification, MIT"
+      "Licence in Economics, Sorbonne Paris",
     ],
     experience: [
       {
-        role: "Head of Operations",
-        company: "Web3 Media Corp",
-        period: "2018-2023",
-        description: "Led operations for major Web3 media platform"
-      },
-      {
-        role: "Blockchain Developer",
-        company: "DeFi Protocol",
-        period: "2016-2018",
-        description: "Core developer for DeFi lending protocol"
+        role: "Community Lead",
+        company: "Ta-da",
+        period: "2023-2025",
+        description: "Led a community of 300k users in 8 languages."
       }
     ],
     social: {
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      github: "https://github.com"
+      linkedin: "https://linkedin.com/in/oscar-mairey",
+      twitter: "https://twitter.com/cesarioo__",
+      github: "github.com/cesarioo/"
     }
   },
   {
@@ -77,17 +67,16 @@ export const teamMembers = [
     role: "Marketing",
     image: "https://pub-44b2544c34a4482595a3ab438ff68918.r2.dev/raphael.png",
     bio: "Marketing expert. Leader of the marketing team at Raizer.",
-    quote: "Building bridges between traditional markets and the crypto ecosystem through effective communication.",
+    quote: "Crypto changed my life, and I want it to change the one of many others.",
     education: [
-      "MBA, INSEAD",
       "BA in Marketing, ESSEC Business School"
     ],
     experience: [
       {
-        role: "Marketing Director",
-        company: "Crypto Exchange",
-        period: "2019-2023",
-        description: "Led global marketing strategy for major crypto exchange"
+        role: "Crypto OG",
+        company: "Solana ecosystem",
+        period: "2021-2025",
+        description: "Anon of various cabals in Solana Ecosystem."
       },
       {
         role: "Brand Manager",
@@ -97,9 +86,7 @@ export const teamMembers = [
       }
     ],
     social: {
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      github: "https://github.com"
+      linkedin: "https://www.linkedin.com/in/raphael-pariente-338b9416/",
     }
   },
   {
@@ -109,21 +96,18 @@ export const teamMembers = [
     bio: "Financial and administration expert. 10+ years experience in administration and finance.",
     quote: "Strong administrative foundations are crucial for building a revolutionary financial platform.",
     education: [
-      "Master in Business Administration, HEC Paris",
-      "CFA Level III Charterholder"
+      "Science Po, Bordeaux.",
     ],
     experience: [
       {
         role: "Head of Administration",
-        company: "Investment Bank",
-        period: "2015-2023",
-        description: "Managed administrative operations for investment banking division"
+        company: "Arte Group",
+        period: "2020-2025",
+        description: "Managed administrative operations for investment banking division."
       }
     ],
     social: {
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      github: "https://github.com"
+      linkedin: "https://www.linkedin.com/in/corentin-s-6b5673172"
     }
   }
 ]
@@ -132,33 +116,19 @@ export const teamMembers = [
   <TeamMember key={member.name} member={member} />
 ))}
 
-## Join Our Open-Source Community
-
-Raizer Protocol is built on the principles of transparency and community collaboration. Our commitment to open-source development means that anyone can contribute to shaping the future of private equity investment.
-
-<Highlight 
-  type="success"
-  title="Open Source Development"
-  description="Raizer Protocol is fully open source. We welcome developers, researchers, and enthusiasts to contribute to our mission of revolutionizing private equity investment."
-/>
+## Join Our Community
 
 ### Ways to Contribute
+<div className="mt-6">
+<Feature icon={Code2}>**Development**: Build and improve our protocol infrastructure</Feature>
+<Feature icon={Shield}>**Security**: Participate in protocol security enhancement</Feature>
+<Feature icon={Users}>**Community**: Engage in governance and ecosystem growth</Feature>
+</div>
 
-- **Code Development**: Help build and improve our smart contracts and platform features
-- **Security Research**: Participate in security audits and improvements
-- **Documentation**: Enhance our technical documentation and guides
-- **Community Support**: Help other developers and users in our community
 
-### Get Started
+Anyone can become a contributor to the Raizer Protocol. Whether you're a developer who can help improve our smart contracts, a content creator who can help explain our mission, or a community manager who can help grow our ecosystem - your skills are valuable. 
 
-Visit our GitHub repository to:
-- Review our contribution guidelines
-- Check open issues and feature requests
-- Submit pull requests
-- Join technical discussions
+We believe in fostering an inclusive environment where diverse perspectives come together to build something revolutionary. Contributors can start by joining our Discord community, participating in governance discussions, or submitting pull requests to our GitHub repositories. 
 
-<Highlight 
-  type="attention"
-  title="Join the Revolution"
-  description="Whether you're a seasoned blockchain developer or just starting out, there's a place for you in the Raizer community."
-/> 
+Regular contributors may be eligible for grants and can potentially join the core team as we expand our operations.
+

@@ -67,7 +67,7 @@ export default function TeamMember({ member }) {
                 <div className="p-2 rounded-xl bg-blue-100">
                   <Briefcase className="h-5 w-5 text-blue-600" />
                 </div>
-                <h4 className="text-lg font-medium text-gray-900">Latest Experience</h4>
+                <h4 className="text-lg font-medium text-gray-900">Meaningful Experience</h4>
               </div>
               {member.experience.slice(0, 1).map((exp, index) => (
                 <div key={index} className="relative pl-6">

@@ -1,4 +1,6 @@
 import Highlight from '../../../components/Highlight'
+import Feature from '../../../components/Feature'
+import { Vote, Users, Shield, Clock, Settings, Network, Workflow, Lock } from 'lucide-react'
 
 # On-Chain Governance
 
@@ -9,42 +11,19 @@ Raizer implements a fully on-chain governance system that transforms traditional
 <Highlight 
   type="feature"
   title="100% On-Chain Governance"
-  description="All shareholder votes are conducted transparently on the blockchain, ensuring verifiable results and immutable record-keeping."
+  description="Every decisions impacting the protocol are are conducted transparently on the blockchain, ensuring verifiable results and immutable record-keeping."
 />
 
 ## Snapshot Voting System
 
-### How Snapshot Voting Works
+Our governance system utilizes a snapshot mechanism that captures token holdings at the exact moment a proposal is created. This ensures fair voting power distribution and prevents manipulation through last-minute token purchases.
 
-Our governance system utilizes a snapshot mechanism that captures token holdings at the exact moment a proposal is created:
-
-1. **Proposal Creation**: When a new vote is initiated, the system automatically takes a snapshot of all token holdings
-2. **Voting Power**: Voting rights are calculated based on token balance at snapshot time
-3. **Vote Delegation**: Users can delegate their voting power to other addresses
-4. **Vote Execution**: Results are automatically recorded and executed on-chain
-
-### Key Benefits of Snapshot Voting
-- **Prevents Vote Manipulation**: No buying power during active votes
-- **Clear Record**: Exact voting power distribution at proposal time
-- **Gas Efficient**: Vote delegation without token transfers
-- **Transparent Process**: All actions visible on-chain
-
-## Vote Delegation
-
-Our system enables sophisticated delegation mechanisms:
-
-### Delegation Features
-- **Flexible Delegation**: Delegate to any address at any time
-- **Multiple Options**: Self-voting or delegation to experts
-- **Instant Updates**: Change delegation with immediate effect
-- **Power Tracking**: Real-time view of delegated voting power
-
-### Strategic Delegation
-Users can choose their delegation strategy:
-- **Direct Participation**: Vote on proposals directly
-- **Expert Delegation**: Delegate to governance specialists
-- **Split Delegation**: Distribute voting power across multiple delegates
-- **Time-Based**: Change delegation based on proposal types
+### Key Features
+<div className="mt-6">
+<Feature icon={Vote}>**Instant Snapshots**: Token balances captured at proposal creation</Feature>
+<Feature icon={Users}>**Flexible Delegation**: Delegate voting power to trusted addresses</Feature>
+<Feature icon={Shield}>**Manipulation Prevention**: No buying power during active votes</Feature>
+</div>
 
 <Highlight 
   type="attention"
@@ -54,70 +33,9 @@ Users can choose their delegation strategy:
 
 ## Proposal Lifecycle
 
-### Creation Phase
-- Company initiates proposal for shareholder vote
-- Snapshot of token holdings is taken
-- Proposal details published on-chain
-- Voting period begins
-
-### Voting Phase
-- Token holders cast votes or use delegated power
-- Real-time voting results visible
-- All votes recorded on-chain
-- Transparent participation tracking
-
-### Execution Phase
-- Automatic vote tallying
-- Results permanently recorded
-- Smart contract execution of approved decisions
-- Immutable audit trail
-
-## Technical Implementation
-
-### Smart Contract Architecture
-- **Proposal Contract**: Manages proposal creation and lifecycle
-- **Voting Contract**: Handles vote casting and delegation
-- **Snapshot Mechanism**: Records token holdings at proposal time
-- **Execution Contract**: Implements approved decisions
-
-### Security Measures
-- **Time Locks**: Protection against flash loan attacks
-- **Access Controls**: Verified proposal creation
-- **Vote Verification**: Double-vote prevention
-- **Result Validation**: Multiple checkpoint system
-
-<Highlight 
-  type="success"
-  title="Governance Innovation"
-  description="Our DAO system brings corporate governance into the blockchain era, ensuring transparency, efficiency, and true decentralization."
-/>
-
-## Participation Methods
-
-### Direct Voting
-- Connect wallet to governance interface
-- Review proposal details and implications
-- Cast vote during active period
-- Track proposal status and results
-
-### Delegate Voting
-- Choose trusted delegate(s)
-- Set delegation parameters
-- Monitor delegate voting activity
-- Update delegation as needed
-
-## Benefits
-
-### For Companies
-- **Efficient Process**: Automated vote management
-- **Cost Reduction**: No manual vote counting
-- **Instant Results**: Real-time vote tracking
-- **Compliance**: Immutable voting records
-
-### For Shareholders
-- **Easy Participation**: Vote from anywhere
-- **Flexible Options**: Direct voting or delegation
-- **Full Transparency**: Verifiable results
-- **Reduced Costs**: No proxy voting fees
-
-By implementing this comprehensive on-chain governance system, Raizer ensures that every shareholder's voice is heard while maintaining the highest standards of transparency and efficiency in corporate decision-making.
+### Creation & Voting
+<div className="mt-6">
+<Feature icon={Workflow}>**Proposal Creation**: Company initiates vote with clear parameters</Feature>
+<Feature icon={Vote}>**Active Voting**: Token holders cast votes or use delegation</Feature>
+<Feature icon={Shield}>**Automatic Execution**: Smart contract implements approved decisions</Feature>
+</div>

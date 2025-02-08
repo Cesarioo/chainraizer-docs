@@ -11,7 +11,6 @@ export default {
   'protocol-features': 'Features of the Protocol',
   'tokenization-process': 'Tokenization Process',
   'product-roadmap': 'Product Roadmap',
-  'decentralization-roadmap': 'Decentralization Roadmap',
   '---': {
     type: 'separator',
     title: (
@@ -20,5 +19,4 @@ export default {
   },
   mission: 'Our Mission',
   team: 'The Builders',
-  notice: 'About ChainRaizer',
 } 
