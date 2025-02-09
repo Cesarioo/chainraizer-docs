@@ -39,9 +39,10 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
   const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false)
 
   useEffect(() => {
-    const checkUser = async () => {
+    const checkUserAndCompletion = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       setUser(user)
+      
       if (user) {
         // Check if user has completed this quiz
         const { data, error } = await supabase
@@ -54,24 +55,26 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
 
         if (data) {
           setHasCompletedQuiz(true)
+        } else {
+          setHasCompletedQuiz(false)
         }
       }
     }
-    checkUser()
+
+    checkUserAndCompletion()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         setUser(session.user)
-        // If modal is open and we get a session, close it and start quiz
-        if (showAuthModal) {
-          setShowAuthModal(false)
-          handleGenerateQuiz()
-        }
+        checkUserAndCompletion()
+      } else {
+        setUser(null)
+        setHasCompletedQuiz(false)
       }
     })
 
     return () => subscription.unsubscribe()
-  }, [supabase.auth])
+  }, [supabase.auth, lesson])
 
   const fireConfetti = () => {
     const end = Date.now() + 3000
@@ -259,6 +262,18 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
     
     if (currentUser) {
       setUser(currentUser)
+      // Check if user has completed this quiz
+      const { data, error } = await supabase
+        .from('documentation_completion')
+        .select()
+        .eq('uuid', currentUser.id)
+        .eq('quizz_part', lesson)
+        .eq('completed', true)
+        .single()
+
+      if (data) {
+        setHasCompletedQuiz(true)
+      }
       setShowAuthModal(false)
       handleGenerateQuiz()
     }
