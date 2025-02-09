@@ -1,6 +1,7 @@
 import { DocSelector } from '../components/selector'
 import Highlight from '../components/Highlight'
 import Feature from '../components/Feature'
+import Quiz from '../components/Quiz'
 import { Coins, ArrowsUpDown, Eye, Users, Shield } from 'lucide-react'
 
 # Welcome to Raizer Documentation
@@ -81,3 +82,85 @@ Get under the hood of Raizer:
   description="Ready to dive in? Start with our protocol documentation and see how we're transforming private equity investment for the digital age."
   href="/raizer"
 /> 
+
+<Quiz 
+  content={`# Welcome to Raizer Documentation
+
+<div className="text-center mb-8 mt-4">
+  <img 
+    src="/alpha.png" 
+    alt="Raizer Alpha Version" 
+    className="w-full max-w-5xl mx-auto"
+    style={{
+      maxHeight: '400px',
+      objectFit: 'contain'
+    }}
+  />
+</div>
+
+Ready to revolutionize private equity? Raizer is your gateway to blockchain-powered investment opportunities. We're breaking down the barriers to private equity by turning traditional shares into digital tokens. Our cutting-edge protocol connects Wall Street to Web3, making it easier than ever to invest in high-growth opportunities.
+
+Key features of our protocol:
+
+<div className="mt-6">
+<Feature icon={Coins}>**Tokenization**: Convert private equity shares into blockchain tokens</Feature>
+<Feature icon={ArrowsUpDown}>**Liquidity**: Trade private equity investments on our secondary market</Feature>
+<Feature icon={Eye}>**Transparency**: Track all investments and transactions on-chain</Feature>
+<Feature icon={Users}>**Accessibility**: Invest in private equity with lower minimum amounts</Feature>
+<Feature icon={Shield}>**Security**: Built with institutional-grade security standards</Feature>
+</div>
+
+<Highlight 
+  type="feature"
+  title="Alpha Release"
+  description="Check out Raizer's alpha release. We're changing the game in private equity investment through next-gen blockchain technology."
+/>
+
+## Documentation
+
+<DocSelector />
+
+### Raizer Protocol 🚀
+
+Get the inside scoop on the protocol:
+
+<div className="mt-6">
+<Feature icon={Eye}>Protocol background and vision</Feature>
+<Feature icon={Shield}>Protocol features and capabilities</Feature>
+<Feature icon={Coins}>Tokenization process</Feature>
+<Feature icon={Users}>Decentralization roadmap</Feature>
+<Feature icon={Shield}>Core values and mission</Feature>
+</div>
+
+### Investor Guide (coming soon) 💼
+
+Your complete playbook for investing through Raizer:
+
+<div className="mt-6">
+<Feature icon={Coins}>Investment process walkthrough</Feature>
+<Feature icon={ArrowsUpDown}>Primary and secondary markets</Feature>
+<Feature icon={Shield}>Portfolio management tools</Feature>
+<Feature icon={Users}>Account setup and security</Feature>
+<Feature icon={Eye}>Wallet integration guide</Feature>
+</div>
+
+### Technical Documentation (coming soon) ⚡
+
+Get under the hood of Raizer:
+
+<div className="mt-6">
+<Feature icon={Shield}>Technical architecture</Feature>
+<Feature icon={Eye}>Smart contract documentation</Feature>
+<Feature icon={Shield}>Security model</Feature>
+<Feature icon={Users}>Integration guides</Feature>
+<Feature icon={Eye}>API references</Feature>
+</div>
+
+<Highlight 
+  type="success"
+  title="Jump Into Raizer"
+  description="Ready to dive in? Start with our protocol documentation and see how we're transforming private equity investment for the digital age."
+  href="/raizer"
+/>`} 
+  lesson={1}
+/>

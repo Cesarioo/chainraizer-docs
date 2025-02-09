@@ -58,7 +58,16 @@ module.exports = {
   		animation: {
   			'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
         'slideIn': 'slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards',
-        'slideOut': 'slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+        'slideOut': 'slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'gradient': 'gradient 1.5s linear infinite',
+        'fadeIn': 'fadeIn 0.2s ease-out',
+        'fadeInUp': 'fadeInUp 0.3s ease-out',
+        'scaleIn': 'scaleIn 0.2s ease-out',
+        'bounce-subtle': 'bounce-subtle 5s ease-in-out infinite',
+        'sparkle-fade': 'sparkle-fade 2s ease-in-out infinite',
+        'sparkle-fade-delayed': 'sparkle-fade 2s ease-in-out infinite 1s',
   		},
       keyframes: {
         slideIn: {
@@ -68,7 +77,40 @@ module.exports = {
         slideOut: {
           '0%': { opacity: '1', transform: 'translateY(0)' },
           '100%': { opacity: '0', transform: 'translateY(20px)' }
-        }
+        },
+        'accordion-down': {
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 0 },
+        },
+        gradient: {
+          '0%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' }
+        },
+        'bounce-subtle': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-4px)' }
+        },
+        'sparkle-fade': {
+          '0%': { opacity: '0', transform: 'scale(0.8) translateY(0)' },
+          '50%': { opacity: '0.5', transform: 'scale(1.2) translateY(-2px)' },
+          '100%': { opacity: '0', transform: 'scale(0.8) translateY(0)' },
+        },
       }
   	}
   },

@@ -1,6 +1,8 @@
 import Highlight from '../../../components/Highlight'
 import Feature from '../../../components/Feature'
 import { Vote, Users, Shield, Clock, Settings, Network, Workflow, Lock } from 'lucide-react'
+import Quiz from '../../components/Quiz'
+
 
 # On-Chain Governance
 
@@ -39,3 +41,34 @@ Our governance system utilizes a snapshot mechanism that captures token holdings
 <Feature icon={Vote}>**Active Voting**: Token holders cast votes or use delegation</Feature>
 <Feature icon={Shield}>**Automatic Execution**: Smart contract implements approved decisions</Feature>
 </div>
+
+<Quiz 
+  content={`On-Chain Governance
+
+Decentralized Decision Making
+
+Raizer implements a fully on-chain governance system that transforms traditional shareholder voting into a transparent, efficient, and decentralized process. Every corporate decision that traditionally requires shareholder approval is conducted through our DAO voting mechanism.
+
+100% On-Chain Governance: Every decisions impacting the protocol are are conducted transparently on the blockchain, ensuring verifiable results and immutable record-keeping.
+
+Snapshot Voting System
+
+Our governance system utilizes a snapshot mechanism that captures token holdings at the exact moment a proposal is created. This ensures fair voting power distribution and prevents manipulation through last-minute token purchases.
+
+Key Features
+
+- Instant Snapshots: Token balances captured at proposal creation
+- Flexible Delegation: Delegate voting power to trusted addresses
+- Manipulation Prevention: No buying power during active votes
+
+Democratic Control: Every token holder has the power to participate in governance, either directly or through carefully chosen delegates.
+
+Proposal Lifecycle
+
+Creation & Voting
+
+- Proposal Creation: Company initiates vote with clear parameters
+- Active Voting: Token holders cast votes or use delegation
+- Automatic Execution: Smart contract implements approved decisions`} 
+  lesson={8}
+/>
