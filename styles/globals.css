@@ -40,11 +40,6 @@ body {
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
   .dark {
@@ -82,4 +77,110 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Floating Button Animations */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.action-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: white;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.action-button.exit {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-button > svg {
+  min-width: 20px;
+  margin-left: 0.25rem;
+}
+
+.write-button {
+  background-color: #10b981;
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.3s;
+}
+
+.write-button.exit {
+  animation: slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.call-button {
+  background-color: #8b5cf6;
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+.call-button.exit {
+  animation: slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.video-button {
+  background-color: #f59e0b;
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.1s;
+}
+
+.video-button.exit {
+  animation: slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.button-label {
+  margin-left: 0.75rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.action-button:hover {
+  width: 120px;
+  padding: 0.75rem 1.25rem;
+  justify-content: flex-start;
+}
+
+.action-button:hover .button-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }

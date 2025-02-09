@@ -57,7 +57,19 @@ module.exports = {
   		},
   		animation: {
   			'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-  		}
+        'slideIn': 'slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+        'slideOut': 'slideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+  		},
+      keyframes: {
+        slideIn: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
+        },
+        slideOut: {
+          '0%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(20px)' }
+        }
+      }
   	}
   },
   plugins: [require("tailwindcss-animate")],
