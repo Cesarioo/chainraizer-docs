@@ -1,7 +1,7 @@
-import '@/styles/globals.css'
+import '../styles/globals.css'
 import 'nextra-theme-docs/style.css'
 import { Inter } from 'next/font/google'
-import FloatingButton from '@/components/FloatingButton'
+import FloatingButton from '../components/FloatingButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
