@@ -48,7 +48,7 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
         const { data, error } = await supabase
           .from('documentation_completion')
           .select()
-          .eq('uuid', user.id)
+          .eq('id', user.id)
           .eq('quizz_part', lesson)
           .eq('completed', true)
           .single()
@@ -193,7 +193,7 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
         const { data, error } = await supabase
           .from('documentation_completion')
           .insert({
-            uuid: user.id,
+            id: user.id,
             quizz_part: lesson,
             completed: true
           })
@@ -266,7 +266,7 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
       const { data, error } = await supabase
         .from('documentation_completion')
         .select()
-        .eq('uuid', currentUser.id)
+        .eq('id', currentUser.id)
         .eq('quizz_part', lesson)
         .eq('completed', true)
         .single()
