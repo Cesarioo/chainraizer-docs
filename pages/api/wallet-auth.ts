@@ -31,6 +31,11 @@ const publicClient = createPublicClient({
   transport: http(process.env.BASE_SEPOLIA_RPC_URL)
 })
 
+// Helper function to validate Solana address format
+const isSolanaAddress = (address: string) => {
+  return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
@@ -52,9 +57,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       )
     }
 
-    // Validate address format
-    if (!isAddress(address)) {
-      console.error('Invalid address format:', address)
+    // Check if message contains chain type
+    const isSolana = message.includes('Solana')
+    
+    // Validate address format based on chain
+    if (isSolana) {
+      if (!isSolanaAddress(address)) {
+        console.error('Invalid Solana address format:', address)
+        return res.status(400).json(
+          { 
+            error: 'Invalid address format',
+            code: 'INVALID_ADDRESS',
+            details: 'The provided address is not a valid Solana address'
+          }
+        )
+      }
+    } else if (!isAddress(address)) {
+      console.error('Invalid Ethereum address format:', address)
       return res.status(400).json(
         { 
           error: 'Invalid address format',
@@ -64,8 +83,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       )
     }
 
-    // Validate signature format
-    if (!signature.startsWith('0x') && !signature.includes('webauthn.get')) {
+    // Validate signature format for Ethereum only
+    if (!isSolana && !signature.startsWith('0x') && !signature.includes('webauthn.get')) {
       console.error('Invalid signature format:', signature)
       return res.status(400).json(
         { 
@@ -80,60 +99,74 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let isValidSignature = false
     let signatureType = ''
     
-    try {
-      // First, try verifying as a regular EOA signature
+    if (isSolana) {
+      // For Solana, we verify the base64 signature format
       try {
-        const isValid = await verifyMessage({
-          address: address as `0x${string}`,
-          message,
-          signature: signature as `0x${string}`,
-        })
-        
-        if (isValid) {
+        // Basic validation that the signature is base64 encoded
+        if (Buffer.from(signature, 'base64').toString('base64') === signature) {
           isValidSignature = true
-          signatureType = 'EOA'
-          console.log('Valid EOA signature verified')
+          signatureType = 'SOLANA'
+          console.log('Valid Solana signature format verified')
         }
       } catch (e) {
-        console.log('EOA signature verification failed:', e)
+        console.error('Solana signature validation failed:', e)
       }
-
-      // If EOA verification fails, try smart contract verification (ERC-1271)
-      if (!isValidSignature) {
+    } else {
+      try {
+        // First, try verifying as a regular EOA signature
         try {
-          const isValid = await publicClient.verifyMessage({
+          const isValid = await verifyMessage({
             address: address as `0x${string}`,
             message,
             signature: signature as `0x${string}`,
           })
-
+          
           if (isValid) {
             isValidSignature = true
-            signatureType = 'SMART_CONTRACT'
-            console.log('Valid smart contract wallet signature verified')
+            signatureType = 'EOA'
+            console.log('Valid EOA signature verified')
           }
         } catch (e) {
-          console.log('Smart contract signature verification failed:', e)
+          console.log('EOA signature verification failed:', e)
         }
-      }
 
-      // Special handling for Coinbase Smart Wallet WebAuthn signatures
-      if (!isValidSignature && signature.length > 500 && signature.includes('webauthn.get')) {
-        try {
-          const signatureData = Buffer.from(signature.slice(2), 'hex').toString()
-          const webAuthnData = JSON.parse(signatureData.slice(signatureData.indexOf('{')))
-          
-          if (webAuthnData.origin === 'https://keys.coinbase.com') {
-            isValidSignature = true
-            signatureType = 'WEBAUTHN'
-            console.log('Valid WebAuthn signature from Coinbase detected')
+        // If EOA verification fails, try smart contract verification (ERC-1271)
+        if (!isValidSignature) {
+          try {
+            const isValid = await publicClient.verifyMessage({
+              address: address as `0x${string}`,
+              message,
+              signature: signature as `0x${string}`,
+            })
+
+            if (isValid) {
+              isValidSignature = true
+              signatureType = 'SMART_CONTRACT'
+              console.log('Valid smart contract wallet signature verified')
+            }
+          } catch (e) {
+            console.log('Smart contract signature verification failed:', e)
           }
-        } catch (e) {
-          console.log('Failed to parse WebAuthn signature:', e)
         }
+
+        // Special handling for Coinbase Smart Wallet WebAuthn signatures
+        if (!isValidSignature && signature.length > 500 && signature.includes('webauthn.get')) {
+          try {
+            const signatureData = Buffer.from(signature.slice(2), 'hex').toString()
+            const webAuthnData = JSON.parse(signatureData.slice(signatureData.indexOf('{')))
+            
+            if (webAuthnData.origin === 'https://keys.coinbase.com') {
+              isValidSignature = true
+              signatureType = 'WEBAUTHN'
+              console.log('Valid WebAuthn signature from Coinbase detected')
+            }
+          } catch (e) {
+            console.log('Failed to parse WebAuthn signature:', e)
+          }
+        }
+      } catch (e) {
+        console.error('Signature verification error:', e)
       }
-    } catch (e) {
-      console.error('Signature verification error:', e)
     }
 
     if (!isValidSignature) {
@@ -197,7 +230,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { data: userData, error: userError } = await supabase
       .from('app_users')
       .select('id, email, wallet_address')
-      .ilike('wallet_address', address)
+      .ilike('wallet_address', `%${address}%`)
       .single()
 
     if (userError) {
