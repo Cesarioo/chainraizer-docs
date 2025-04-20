@@ -37,15 +37,19 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [user, setUser] = useState<any>(null)
   const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false)
+  const [isCheckingCompletion, setIsCheckingCompletion] = useState(true)
+  const [canAccessQuiz, setCanAccessQuiz] = useState(false)
+  const [previousQuizCompleted, setPreviousQuizCompleted] = useState(false)
 
   useEffect(() => {
     const checkUserAndCompletion = async () => {
+      setIsCheckingCompletion(true)
       const { data: { user } } = await supabase.auth.getUser()
       setUser(user)
       
       if (user) {
         // Check if user has completed this quiz
-        const { data, error } = await supabase
+        const { data: currentQuizData, error: currentQuizError } = await supabase
           .from('documentation_completion')
           .select()
           .eq('id', user.id)
@@ -53,12 +57,31 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
           .eq('completed', true)
           .single()
 
-        if (data) {
+        if (currentQuizData) {
           setHasCompletedQuiz(true)
         } else {
           setHasCompletedQuiz(false)
         }
+
+        // Check if previous quiz was completed
+        if (lesson > 1) {
+          const { data: previousQuizData, error: previousQuizError } = await supabase
+            .from('documentation_completion')
+            .select()
+            .eq('id', user.id)
+            .eq('quizz_part', lesson - 1)
+            .eq('completed', true)
+            .single()
+
+          setPreviousQuizCompleted(!!previousQuizData)
+          setCanAccessQuiz(!!previousQuizData)
+        } else {
+          // For lesson 1, there's no previous quiz required
+          setPreviousQuizCompleted(true)
+          setCanAccessQuiz(true)
+        }
       }
+      setIsCheckingCompletion(false)
     }
 
     checkUserAndCompletion()
@@ -127,40 +150,64 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
     
     setIsQuizLoading(true)
     setError(null)
-    try {
-      const response = await fetch("/api/generate-quizz", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ 
-          transcript: content,
-          lesson: lesson 
-        }),
-      })
 
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to generate quiz')
+    const MAX_RETRIES = 3
+    let currentRetry = 0
+    let success = false
+
+    while (!success && currentRetry < MAX_RETRIES) {
+      try {
+        const response = await fetch("/api/generate-quizz", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            transcript: content,
+            lesson: lesson 
+          }),
+        })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || 'Failed to generate quiz')
+        }
+
+        const data = await response.json()
+
+        // Validate the response format
+        if (data.questions && 
+            Array.isArray(data.questions.questions) && 
+            data.questions.questions.length > 0 &&
+            data.questions.questions.every(q => 
+              q.question && 
+              Array.isArray(q.options) && 
+              q.options.length > 0 && 
+              q.correctAnswer
+            )) {
+          setQuizQuestions(data.questions.questions)
+          setShowQuiz(true)
+          setIsOpen(true)
+          setIsCompleted(false)
+          success = true
+        } else {
+          throw new Error('Invalid quiz format received')
+        }
+      } catch (error) {
+        console.error(`Attempt ${currentRetry + 1} failed:`, error)
+        currentRetry++
+        
+        if (currentRetry === MAX_RETRIES) {
+          setError(error instanceof Error ? error.message : 'Failed to generate quiz after multiple attempts')
+          setQuizQuestions([])
+        } else {
+          // Wait for a short time before retrying (exponential backoff)
+          await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, currentRetry)))
+        }
       }
-
-      const data = await response.json()
-
-      if (data.questions && data.questions.questions) {
-        setQuizQuestions(data.questions.questions)
-        setShowQuiz(true)
-        setIsOpen(true)
-        setIsCompleted(false)
-      } else {
-        throw new Error('Invalid quiz format received')
-      }
-    } catch (error) {
-      console.error("Error generating quiz:", error)
-      setError(error instanceof Error ? error.message : 'Failed to generate quiz')
-      setQuizQuestions([])
-    } finally {
-      setIsQuizLoading(false)
     }
+
+    setIsQuizLoading(false)
   }
 
   const handleQuizCompletion = async (finalScore: number) => {
@@ -282,10 +329,20 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
   return (
     <>
       <div className="flex justify-center my-8">
-        {hasCompletedQuiz ? (
+        {isCheckingCompletion ? (
+          <div className="flex items-center gap-2 px-8 py-4 bg-gray-50 text-gray-700 rounded-2xl border-2 border-gray-200">
+            <div className="w-3 h-3 bg-gray-500 rounded-full animate-pulse" />
+            <span className="text-lg font-medium">Checking completion status...</span>
+          </div>
+        ) : hasCompletedQuiz ? (
           <div className="flex items-center gap-2 px-8 py-4 bg-green-50 text-green-700 rounded-2xl border-2 border-green-200">
             <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
             <span className="text-lg font-medium">Quiz Completed</span>
+          </div>
+        ) : !canAccessQuiz ? (
+          <div className="flex items-center gap-2 px-8 py-4 bg-yellow-50 text-yellow-700 rounded-2xl border-2 border-yellow-200">
+            <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+            <span className="text-lg font-medium">Complete previous quiz first</span>
           </div>
         ) : (
           <LoadingQuizButton 
