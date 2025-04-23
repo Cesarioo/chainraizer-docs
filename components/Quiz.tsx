@@ -339,6 +339,11 @@ export default function Quiz({ content, lesson, onComplete }: QuizProps) {
             <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
             <span className="text-lg font-medium">Quiz Completed</span>
           </div>
+        ) : !user ? (
+          <LoadingQuizButton 
+            isLoading={isQuizLoading} 
+            onClick={() => setShowAuthModal(true)}
+          />
         ) : !canAccessQuiz ? (
           <div className="flex items-center gap-2 px-8 py-4 bg-yellow-50 text-yellow-700 rounded-2xl border-2 border-yellow-200">
             <div className="w-3 h-3 bg-yellow-500 rounded-full" />
